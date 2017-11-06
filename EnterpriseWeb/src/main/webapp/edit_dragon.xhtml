@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:metadata>
+    <f:viewParam name="dragonId" value="#{editDragon.dragonId}" />
+    <f:event type="preRenderView" listener="#{editDragon.init()}"/>
+</f:metadata>
+<h:head>
+    <title>#{editDragon.dragon.name}</title>
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <h:panelGrid columns="3" styleClass="tabela">
+            <h:outputLabel value="Imię:" for="name"/>
+            <h:inputText id="name"
+                         value="#{editDragon.dragon.name}"/>
+            <h:message for="name"/>
+
+            <h:outputLabel value="Złoto:" for="gold"/>
+            <h:inputText id="gold"
+                         value="#{editDragon.dragon.gold}"/>
+            <h:message for="gold"/>
+
+            <h:outputLabel value="Kolor:" for="color"/>
+            <h:selectOneListbox id="color" value="#{editDragon.dragon.color}"
+                                converter="#{dragonColorConverter}">
+                <f:selectItems value="#{editDragon.colorsAsSelectItems}"/>
+            </h:selectOneListbox>
+            <h:message for="color"/>
+
+            <h:outputLabel value="Jaskinia:" for="cave"/>
+            <h:selectOneListbox id="cave" value="#{editDragon.dragon.cave}"
+                                converter="#{caveConverter}">
+                <f:selectItems value="#{editDragon.cavesAsSelectItems}"/>
+            </h:selectOneListbox>
+            <h:message for="cave"/>
+        </h:panelGrid>
+
+        <h:commandButton value="Zapisz" action="#{editDragon.saveDragon()}"/>
+
+    </h:form>
+    <h:button value="Powrót" outcome="list_dragons.xhtml"/>
+</h:body>
+</html>

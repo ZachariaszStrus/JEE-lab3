@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:metadata>
+    <f:viewParam name="caveId" value="#{editCave.caveId}" />
+    <f:event type="preRenderView" listener="#{editCave.init()}"/>
+</f:metadata>
+<h:head>
+    <title>#{editCave.getTitle()}</title>
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <h:outputLabel value="#{editCave.getTitle()}"/>
+        <h:panelGrid columns="3" styleClass="tabela">
+            <h:outputLabel value="Powierzchnia:" for="area"/>
+            <h:inputText id="area"
+                         value="#{editCave.cave.area}"/>
+            <h:message for="area"/>
+        </h:panelGrid>
+
+        <h:commandButton value="Zapisz" action="#{editCave.saveCave()}"/>
+
+    </h:form>
+    <h:button value="Powrót" outcome="list_dragons.xhtml"/>
+</h:body>
+</html>

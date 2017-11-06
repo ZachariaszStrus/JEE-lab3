@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Smoki</title>
+</h:head>
+<h:body>
+    <h:dataTable value="#{listDragons.caves}" var="cave" border="2">
+        <h:column>
+            <h:outputText value="Jaskinia #{cave.id}"/>
+        </h:column>
+        <h:column>
+            <h:outputText value="#{cave.area}m2"/>
+        </h:column>
+        <h:column>
+            <h:dataTable value="#{cave.dragons}" var="dragon" border="1">
+                <h:column>
+                    <h:outputText value="#{dragon.name}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{dragon.gold}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{dragon.color}"/>
+                </h:column>
+                <h:column>
+                    <h:button value="Edytuj" outcome="edit_dragon.xhtml">
+                        <f:param name="dragonId" value="#{dragon.id}" />
+                    </h:button>
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <h:commandButton value="Usuń"
+                                         action="#{listDragons.removeDragon(dragon)}"/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </h:column>
+        <h:column>
+            <h:button value="Edytuj" outcome="edit_cave.xhtml">
+                <f:param name="caveId" value="#{cave.id}" />
+            </h:button>
+        </h:column>
+        <h:column>
+            <h:form>
+                <h:commandButton value="Usuń"
+                                 action="#{listDragons.removeCave(cave)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+    <h:button value="Dodaj smoka" outcome="edit_dragon.xhtml"/>
+    <h:button value="Dodaj jaskinię" outcome="edit_cave.xhtml"/>
+</h:body>
+</html>
